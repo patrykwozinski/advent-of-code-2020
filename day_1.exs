@@ -206,8 +206,6 @@ defmodule DayOne do
 
     numbers
     |> Enum.filter(&Enum.member?(numbers, 2020 - &1))
-    |> Enum.reduce(1, fn x, acc ->
-      x * acc
-    end)
+    |> Enum.reduce(1, &(&1 * &2))
   end
 end

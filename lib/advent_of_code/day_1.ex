@@ -201,11 +201,26 @@ defmodule AdventOfCode.Day1 do
   1987
   )
 
-  def calc() do
+  def calc_part1() do
     numbers = Enum.map(@numbers, &String.to_integer(&1))
 
-    numbers
-    |> Enum.filter(&Enum.member?(numbers, 2020 - &1))
-    |> Enum.reduce(1, &(&1 * &2))
+    [res | _] = for x <- numbers,
+      y <- numbers,
+      x + y == 2020,
+      do: x * y
+
+    res
+  end
+
+  def calc_part2() do
+    numbers = Enum.map(@numbers, &String.to_integer(&1))
+
+    [res | _] = for x <- numbers,
+      y <- numbers,
+      z <- numbers,
+      x + y + z == 2020,
+      do: x * y * z
+
+    res
   end
 end

@@ -205,15 +205,9 @@ defmodule DayOne do
     numbers = Enum.map(@numbers, &String.to_integer(&1))
 
     numbers
-    |> Enum.filter(&calc(&1, numbers))
+    |> Enum.filter(&Enum.member?(numbers, 2020 - &1))
     |> Enum.reduce(1, fn x, acc ->
       x * acc
     end)
-  end
-
-  defp calc(number, all) do
-    missing = 2020 - number
-
-    Enum.member?(all, missing)
   end
 end

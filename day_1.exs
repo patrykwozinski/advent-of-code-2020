@@ -201,11 +201,14 @@ defmodule DayOne do
 1987
 )
 
-  def result() do
+  def calculate() do
     numbers = Enum.map(@numbers, &String.to_integer(&1))
 
     numbers
     |> Enum.filter(&calc(&1, numbers))
+    |> Enum.reduce(1, fn x, acc ->
+      x * acc
+    end)
   end
 
   defp calc(number, all) do

@@ -9,11 +9,12 @@ defmodule AdventOfCode.Day2Part2 do
       Regex.named_captures(@pattern, line)
     end)
     |> Stream.filter(fn %{"char" => char, "x" => x, "y" => y, "password" => password} ->
-      is_at_x = String.at(password, String.to_integer(x) - 1) == char
-      is_at_y = String.at(password, String.to_integer(y) - 1) == char
-
-      is_at_x != is_at_y
+      is_at(password, x, char) != is_at(password, y, char)
     end)
     |> Enum.count()
+  end
+
+  defp is_at(password, position, char) do
+    String.at(password, String.to_integer(position) - 1) == char
   end
 end

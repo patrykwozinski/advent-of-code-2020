@@ -201,7 +201,7 @@ defmodule AdventOfCode.Day1 do
   1987
   )
 
-  def calc_part1() do
+  def part1() do
     numbers = Enum.map(@numbers, &String.to_integer(&1))
 
     [res | _] = for x <- numbers,
@@ -212,7 +212,7 @@ defmodule AdventOfCode.Day1 do
     res
   end
 
-  def calc_part2() do
+  def part2() do
     numbers = Enum.map(@numbers, &String.to_integer(&1))
 
     [res | _] = for x <- numbers,

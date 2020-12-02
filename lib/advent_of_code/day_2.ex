@@ -1,5 +1,5 @@
 defmodule AdventOfCode.Day2 do
-  @pattern ~r/(?<min>\d)-(?<max>\d)\s(?<char>\w):\s*(?<password>\w*)/
+  @pattern ~r/(?<min>\d*)-(?<max>\d*)\s(?<char>\w):\s*(?<password>\w*)/
 
   def calculate(file_path) do
     file_path

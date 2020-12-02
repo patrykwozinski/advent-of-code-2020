@@ -4,12 +4,18 @@ defmodule AdventOfCodeTest.Day2Test do
   alias AdventOfCode.Day2
 
   describe "Part 1 of the task" do
-    test "should be calculated how many passwords is valid" do
+    test "short data set should contain exactly two valid passwords" do
       assert Day2.calculate("test/fixtures/day2/short.txt") == 2
     end
 
-    test "day 2 solution" do
+    test "full data set should contain 546 valid passwords" do
       assert Day2.calculate("test/fixtures/day2/full.txt") == 546
+    end
+  end
+
+  describe "Part 2 of the task" do
+    test "short data should contain one valid password" do
+      assert Day2.calculate_part_2("test/fixtures/day2/short.txt") == 1
     end
   end
 end

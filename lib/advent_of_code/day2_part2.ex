@@ -9,12 +9,10 @@ defmodule AdventOfCode.Day2Part2 do
       Regex.named_captures(@pattern, line)
     end)
     |> Stream.filter(fn %{"char" => char, "x" => x, "y" => y, "password" => password} ->
-      occurrences =
-        password
-        |> String.graphemes()
-        |> Enum.count(&(&1 == char))
+      is_at_x = String.at(password, String.to_integer(x) - 1) == char
+      is_at_y = String.at(password, String.to_integer(y) - 1) == char
 
-      occurrences >= String.to_integer(x) and occurrences <= String.to_integer(y)
+      is_at_x != is_at_y
     end)
     |> Enum.count()
   end

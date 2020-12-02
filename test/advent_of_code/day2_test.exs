@@ -18,5 +18,9 @@ defmodule AdventOfCodeTest.Day2Test do
     test "short data should contain one valid password" do
       assert Day2Part2.calculate("test/fixtures/day2/short.txt") == 1
     end
+
+    test "full data should contain 275 valid password" do
+      assert Day2Part2.calculate("test/fixtures/day2/full.txt") == 275
+    end
   end
 end

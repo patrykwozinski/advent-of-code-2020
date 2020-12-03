@@ -8,9 +8,9 @@ defmodule AdventOfCode.Day3Part1 do
     |> Enum.reduce({0, 0}, fn line, {position, trees} ->
       is_tree = String.at(line, position) == "#"
       trees = if is_tree, do: trees + 1, else: trees
-      next_position = rem(position + @position_move, String.length(line))
+      position = rem(position + @position_move, String.length(line))
 
-      {next_position, trees}
+      {position, trees}
     end)
 
     trees

@@ -6,8 +6,8 @@ defmodule AdventOfCode.Day3Part1 do
     |> Stream.map(&String.replace(&1, "\n", ""))
     |> Enum.to_list()
     |> Enum.reduce({0, 0}, fn line, {position, trees} ->
-      is_tree = String.at(line, position) == "#"
-      trees = if is_tree, do: trees + 1, else: trees
+      meet_tree = String.at(line, position) == "#"
+      trees = if meet_tree, do: trees + 1, else: trees
       position = rem(position + @position_move, String.length(line))
 
       {position, trees}

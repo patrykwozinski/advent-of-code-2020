@@ -18,5 +18,9 @@ defmodule AdventOfCodeTest.Day3Test do
     test "the toboggan should meet 336 trees with 5 slopes" do
       assert Day3Part2.calculate("test/fixtures/day3/short.txt") == 336
     end
+
+    test "the toboggan should meet x trees with 6050183040 slopes and full forest" do
+      assert Day3Part2.calculate("test/fixtures/day3/full.txt") == 6050183040
+    end
   end
 end

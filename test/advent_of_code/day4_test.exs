@@ -9,8 +9,8 @@ defmodule AdventOfCodeTest.Day4Test do
       assert Day4Part1.calculate("test/fixtures/day4/short.txt") == 2
     end
 
-    # test "the toboggan should meet 274 trees for full forest" do
-    #   assert Day4Part1.calculate("test/fixtures/day4/full.txt") == 0
-    # end
+    test "short passport list should contain 210 valid passports" do
+      assert Day4Part1.calculate("test/fixtures/day4/full.txt") == 210
+    end
   end
 end

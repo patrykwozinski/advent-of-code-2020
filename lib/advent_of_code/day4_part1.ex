@@ -7,7 +7,6 @@ defmodule AdventOfCode.Day4Part1 do
       |> String.split("\n", trim: true)
       |> Enum.flat_map(&String.split(&1))
     end)
-    # |> Enum.filter(&(is_required(&1)))
     |> Enum.filter(&all_required_fields?(&1))
     |> Enum.count()
   end

@@ -7,11 +7,11 @@ defmodule AdventOfCode.Day4Part2 do
       |> String.split("\n", trim: true)
       |> Enum.flat_map(&String.split(&1))
     end)
-    |> Enum.filter(&all_required_fields?(&1))
+    |> Enum.filter(&valid_passport?(&1))
     |> Enum.count()
   end
 
-  defp all_required_fields?(document) do
+  defp valid_passport?(document) do
     has_byr =
       Enum.any?(document, fn data ->
         case data do

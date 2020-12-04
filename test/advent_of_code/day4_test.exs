@@ -23,7 +23,7 @@ defmodule AdventOfCodeTest.Day4Test do
       assert Day4Part2.calculate("test/fixtures/day4/short_valid.txt") == 4
     end
 
-    test "full passport list should contain 4 valid passports" do
+    test "full passport list should contain 131 valid passports" do
       assert Day4Part2.calculate("test/fixtures/day4/full.txt") == 131
     end
   end

@@ -48,7 +48,7 @@ defmodule AdventOfCode.Day4Part2 do
     has_hgt =
       Enum.any?(document, fn data ->
         case data do
-          "hgt:" <> detail -> true
+          "hgt:" <> height -> valid_height?(height)
           _ -> false
         end
       end)
@@ -86,5 +86,13 @@ defmodule AdventOfCode.Day4Part2 do
 
   defp between?(year, from, to) when is_integer(year) do
     year in from..to
+  end
+
+  defp valid_height?(full_height) do
+    case Integer.parse(full_height) do
+      {height, "in"} when height in 59..76 -> true
+      {height, "cm"} when height in 150..193 -> true
+      _ -> false
+    end
   end
 end

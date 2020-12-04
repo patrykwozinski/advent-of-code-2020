@@ -24,15 +24,13 @@ defmodule AdventOfCode.Day4Part2 do
   end
 
   defp valid_passport?(document) do
-    has_byr = document["byr"] |> between?(1920, 2002)
-    has_iyr = document["iyr"] |> between?(2010, 2020)
-    has_eyr = document["eyr"] |> between?(2020, 2030)
-    has_hgt = document["hgt"] |> valid_height?()
-    has_hcl = document["hcl"] |> valid_hair_color?()
-    has_ecl = document["ecl"] |> valid_eye_color?()
-    has_pid = document["pid"] |> valid_passport_id?()
-
-    has_byr and has_iyr and has_eyr and has_hgt and has_hcl and has_ecl and has_pid
+    document["byr"] |> between?(1920, 2002) and
+      document["iyr"] |> between?(2010, 2020) and
+      document["eyr"] |> between?(2020, 2030) and
+      document["hgt"] |> valid_height?() and
+      document["hcl"] |> valid_hair_color?() and
+      document["ecl"] |> valid_eye_color?() and
+      document["pid"] |> valid_passport_id?()
   end
 
   defp between?(year, from, to) when is_binary(year),

@@ -24,13 +24,13 @@ defmodule AdventOfCode.Day4Part2 do
   end
 
   defp valid_passport?(document) do
-    has_byr = not is_nil(document["byr"]) and document["byr"] |> between?(1920, 2002)
-    has_iyr = not is_nil(document["iyr"]) and document["iyr"] |> between?(2010, 2020)
-    has_eyr = not is_nil(document["eyr"]) and document["eyr"] |> between?(2020, 2030)
-    has_hgt = not is_nil(document["hgt"]) and document["hgt"] |> valid_height?()
-    has_hcl = not is_nil(document["hcl"]) and document["hcl"] |> valid_hair_color?()
-    has_ecl = not is_nil(document["ecl"]) and document["ecl"] |> valid_eye_color?()
-    has_pid = not is_nil(document["pid"]) and document["pid"] |> valid_passport_id?()
+    has_byr = document["byr"] |> between?(1920, 2002)
+    has_iyr = document["iyr"] |> between?(2010, 2020)
+    has_eyr = document["eyr"] |> between?(2020, 2030)
+    has_hgt = document["hgt"] |> valid_height?()
+    has_hcl = document["hcl"] |> valid_hair_color?()
+    has_ecl = document["ecl"] |> valid_eye_color?()
+    has_pid = document["pid"] |> valid_passport_id?()
 
     has_byr and has_iyr and has_eyr and has_hgt and has_hcl and has_ecl and has_pid
   end
@@ -40,7 +40,9 @@ defmodule AdventOfCode.Day4Part2 do
 
   defp between?(year, from, to) when is_integer(year), do: year in from..to
 
-  defp valid_height?(full_height) do
+  defp between?(nil, _from, _to), do: false
+
+  defp valid_height?(full_height) when is_binary(full_height) do
     case Integer.parse(full_height) do
       {height, "in"} when height in 59..76 -> true
       {height, "cm"} when height in 150..193 -> true
@@ -48,9 +50,20 @@ defmodule AdventOfCode.Day4Part2 do
     end
   end
 
-  defp valid_hair_color?(hair_color), do: String.match?(hair_color, ~r/^#[0-9a-f]{6}$/)
+  defp valid_height?(nil), do: false
 
-  defp valid_eye_color?(eye_color), do: eye_color in ~w(amb blu brn gry grn hzl oth)
+  defp valid_hair_color?(hair_color) when is_binary(hair_color),
+    do: String.match?(hair_color, ~r/^#[0-9a-f]{6}$/)
 
-  defp valid_passport_id?(passport_id), do: String.match?(passport_id, ~r/^[0-9]{9}$/)
+  defp valid_hair_color?(nil), do: false
+
+  defp valid_eye_color?(eye_color) when is_binary(eye_color),
+    do: eye_color in ~w(amb blu brn gry grn hzl oth)
+
+  defp valid_eye_color?(nil), do: false
+
+  defp valid_passport_id?(passport_id) when is_binary(passport_id),
+    do: String.match?(passport_id, ~r/^[0-9]{9}$/)
+
+  defp valid_passport_id?(nil), do: false
 end

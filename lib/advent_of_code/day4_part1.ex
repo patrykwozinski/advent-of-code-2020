@@ -1,5 +1,12 @@
 defmodule AdventOfCode.Day4Part1 do
   def calculate(file_path) do
+    file_path
+    |> read_passports()
+    |> Enum.filter(&valid_passport?(&1))
+    |> Enum.count()
+  end
+
+  defp read_passports(file_path) do
     File.read!(file_path)
     |> String.split("\n\n", trim: true)
     |> Enum.map(fn passport ->
@@ -7,11 +14,9 @@ defmodule AdventOfCode.Day4Part1 do
       |> String.split("\n", trim: true)
       |> Enum.flat_map(&String.split(&1))
     end)
-    |> Enum.filter(&all_required_fields?(&1))
-    |> Enum.count()
   end
 
-  defp all_required_fields?(document) do
+  defp valid_passport?(document) do
     has_byr =
       Enum.any?(document, fn data ->
         case data do

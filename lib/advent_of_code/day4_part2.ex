@@ -56,7 +56,7 @@ defmodule AdventOfCode.Day4Part2 do
     has_hcl =
       Enum.any?(document, fn data ->
         case data do
-          "hcl:" <> detail -> true
+          "hcl:" <> hair_color -> String.match?(hair_color, ~r/^#[0-9a-f]{6}$/)
           _ -> false
         end
       end)
@@ -64,7 +64,7 @@ defmodule AdventOfCode.Day4Part2 do
     has_ecl =
       Enum.any?(document, fn data ->
         case data do
-          "ecl:" <> detail -> true
+          "ecl:" <> eye_color -> eye_color in ~w[amb blu brn gry grn hzl oth]
           _ -> false
         end
       end)

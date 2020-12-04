@@ -1,4 +1,6 @@
 defmodule AdventOfCode.Day4Part2 do
+  @req_fields ~w(byr iyr eyr hgt hcl ecl pid)
+
   def calculate(file_path) do
     file_path
     |> read_passports()
@@ -61,7 +63,7 @@ defmodule AdventOfCode.Day4Part2 do
     has_hcl =
       Enum.any?(document, fn data ->
         case data do
-          "hcl:" <> hair_color -> String.match?(hair_color, ~r/^#[0-9a-f]{6}$/)
+          "hcl:" <> hair_color -> valid_hair_color?(hair_color)
           _ -> false
         end
       end)
@@ -69,7 +71,7 @@ defmodule AdventOfCode.Day4Part2 do
     has_ecl =
       Enum.any?(document, fn data ->
         case data do
-          "ecl:" <> eye_color -> eye_color in ~w[amb blu brn gry grn hzl oth]
+          "ecl:" <> eye_color -> valid_eye_color?(eye_color)
           _ -> false
         end
       end)
@@ -85,13 +87,10 @@ defmodule AdventOfCode.Day4Part2 do
     has_byr and has_iyr and has_eyr and has_hgt and has_hcl and has_ecl and has_pid
   end
 
-  defp between?(year, from, to) when is_binary(year) do
-    String.to_integer(year) |> between?(from, to)
-  end
+  defp between?(year, from, to) when is_binary(year),
+    do: String.to_integer(year) |> between?(from, to)
 
-  defp between?(year, from, to) when is_integer(year) do
-    year in from..to
-  end
+  defp between?(year, from, to) when is_integer(year), do: year in from..to
 
   defp valid_height?(full_height) do
     case Integer.parse(full_height) do
@@ -100,4 +99,8 @@ defmodule AdventOfCode.Day4Part2 do
       _ -> false
     end
   end
+
+  defp valid_hair_color?(hair_color), do: String.match?(hair_color, ~r/^#[0-9a-f]{6}$/)
+
+  defp valid_eye_color?(eye_color), do: eye_color in ~w[amb blu brn gry grn hzl oth]
 end

@@ -11,7 +11,7 @@ defmodule AdventOfCode.Day4Part1 do
     |> String.split("\n\n", trim: true)
     |> Enum.map(fn passport ->
       passport
-      |> String.split("\n", trim: true)
+      |> String.splitter("\n", trim: true)
       |> Enum.flat_map(&String.split(&1))
     end)
   end

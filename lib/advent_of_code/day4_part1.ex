@@ -9,15 +9,17 @@ defmodule AdventOfCode.Day4Part1 do
   defp read_passports(file_path) do
     File.read!(file_path)
     |> String.split("\n\n", trim: true)
-    |> Enum.map(fn passport ->
-      passport
-      |> String.splitter("\n", trim: true)
-      |> Enum.flat_map(&String.split(&1))
-      |> Enum.into(%{}, fn field ->
-        field
-        |> String.split(":")
-        |> List.to_tuple()
-      end)
+    |> Enum.map(&prepare_passport(&1))
+  end
+
+  defp prepare_passport(passport) do
+    passport
+    |> String.splitter("\n", trim: true)
+    |> Enum.flat_map(&String.split(&1))
+    |> Enum.into(%{}, fn field ->
+      field
+      |> String.split(":")
+      |> List.to_tuple()
     end)
   end
 

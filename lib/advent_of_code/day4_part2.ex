@@ -1,6 +1,4 @@
 defmodule AdventOfCode.Day4Part2 do
-  @req_fields ~w(byr iyr eyr hgt hcl ecl pid)
-
   def calculate(file_path) do
     file_path
     |> read_passports()
@@ -79,7 +77,7 @@ defmodule AdventOfCode.Day4Part2 do
     has_pid =
       Enum.any?(document, fn data ->
         case data do
-          "pid:" <> passport_id -> String.match?(passport_id, ~r/^[0-9]{9}$/)
+          "pid:" <> passport_id -> valid_passport_id?(passport_id)
           _ -> false
         end
       end)
@@ -102,5 +100,7 @@ defmodule AdventOfCode.Day4Part2 do
 
   defp valid_hair_color?(hair_color), do: String.match?(hair_color, ~r/^#[0-9a-f]{6}$/)
 
-  defp valid_eye_color?(eye_color), do: eye_color in ~w[amb blu brn gry grn hzl oth]
+  defp valid_eye_color?(eye_color), do: eye_color in ~w(amb blu brn gry grn hzl oth)
+
+  defp valid_passport_id?(passport_id), do: String.match?(passport_id, ~r/^[0-9]{9}$/)
 end

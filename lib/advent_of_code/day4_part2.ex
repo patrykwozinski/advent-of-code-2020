@@ -72,7 +72,7 @@ defmodule AdventOfCode.Day4Part2 do
     has_pid =
       Enum.any?(document, fn data ->
         case data do
-          "pid:" <> detail -> true
+          "pid:" <> passport_id -> String.match?(passport_id, ~r/^[0-9]{9}$/)
           _ -> false
         end
       end)

@@ -16,11 +16,11 @@ defmodule AdventOfCodeTest.Day4Test do
 
   describe "Part 2 of the passport list" do
     test "short passport invalid-list should contain 0 valid passports" do
-      assert Day4Part1.calculate("test/fixtures/day4/short_invalid.txt") == 0
+      assert Day4Part2.calculate("test/fixtures/day4/short_invalid.txt") == 0
     end
 
     test "short passport valid-list should contain 4 valid passports" do
-      assert Day4Part1.calculate("test/fixtures/day4/short_valid.txt") == 4
+      assert Day4Part2.calculate("test/fixtures/day4/short_valid.txt") == 4
     end
   end
 end

@@ -13,74 +13,22 @@ defmodule AdventOfCode.Day4Part2 do
       passport
       |> String.splitter("\n", trim: true)
       |> Enum.flat_map(&String.split(&1))
+      |> Enum.into(%{}, fn field ->
+        field
+        |> String.split(":")
+        |> List.to_tuple()
+      end)
     end)
   end
 
   defp valid_passport?(document) do
-    has_byr =
-      Enum.any?(document, fn data ->
-        case data do
-          "byr:" <> year ->
-            year |> between?(1920, 2002)
-
-          _ ->
-            false
-        end
-      end)
-
-    has_iyr =
-      Enum.any?(document, fn data ->
-        case data do
-          "iyr:" <> year ->
-            year |> between?(2010, 2020)
-
-          _ ->
-            false
-        end
-      end)
-
-    has_eyr =
-      Enum.any?(document, fn data ->
-        case data do
-          "eyr:" <> year ->
-            year |> between?(2020, 2030)
-
-          _ ->
-            false
-        end
-      end)
-
-    has_hgt =
-      Enum.any?(document, fn data ->
-        case data do
-          "hgt:" <> height -> valid_height?(height)
-          _ -> false
-        end
-      end)
-
-    has_hcl =
-      Enum.any?(document, fn data ->
-        case data do
-          "hcl:" <> hair_color -> valid_hair_color?(hair_color)
-          _ -> false
-        end
-      end)
-
-    has_ecl =
-      Enum.any?(document, fn data ->
-        case data do
-          "ecl:" <> eye_color -> valid_eye_color?(eye_color)
-          _ -> false
-        end
-      end)
-
-    has_pid =
-      Enum.any?(document, fn data ->
-        case data do
-          "pid:" <> passport_id -> valid_passport_id?(passport_id)
-          _ -> false
-        end
-      end)
+    has_byr = not is_nil(document["byr"]) and document["byr"] |> between?(1920, 2002)
+    has_iyr = not is_nil(document["iyr"]) and document["iyr"] |> between?(2010, 2020)
+    has_eyr = not is_nil(document["eyr"]) and document["eyr"] |> between?(2020, 2030)
+    has_hgt = not is_nil(document["hgt"]) and document["hgt"] |> valid_height?()
+    has_hcl = not is_nil(document["hcl"]) and document["hcl"] |> valid_hair_color?()
+    has_ecl = not is_nil(document["ecl"]) and document["ecl"] |> valid_eye_color?()
+    has_pid = not is_nil(document["pid"]) and document["pid"] |> valid_passport_id?()
 
     has_byr and has_iyr and has_eyr and has_hgt and has_hcl and has_ecl and has_pid
   end

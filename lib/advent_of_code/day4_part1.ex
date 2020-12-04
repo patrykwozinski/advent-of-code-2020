@@ -13,66 +13,21 @@ defmodule AdventOfCode.Day4Part1 do
       passport
       |> String.splitter("\n", trim: true)
       |> Enum.flat_map(&String.split(&1))
+      |> Enum.into(%{}, fn field ->
+        field
+        |> String.split(":")
+        |> List.to_tuple()
+      end)
     end)
   end
 
   defp valid_passport?(document) do
-    has_byr =
-      Enum.any?(document, fn data ->
-        case data do
-          "byr" <> _ -> true
-          _ -> false
-        end
-      end)
-
-    has_iyr =
-      Enum.any?(document, fn data ->
-        case data do
-          "iyr" <> _ -> true
-          _ -> false
-        end
-      end)
-
-    has_eyr =
-      Enum.any?(document, fn data ->
-        case data do
-          "eyr" <> _ -> true
-          _ -> false
-        end
-      end)
-
-    has_hgt =
-      Enum.any?(document, fn data ->
-        case data do
-          "hgt" <> _ -> true
-          _ -> false
-        end
-      end)
-
-    has_hcl =
-      Enum.any?(document, fn data ->
-        case data do
-          "hcl" <> _ -> true
-          _ -> false
-        end
-      end)
-
-    has_ecl =
-      Enum.any?(document, fn data ->
-        case data do
-          "ecl" <> _ -> true
-          _ -> false
-        end
-      end)
-
-    has_pid =
-      Enum.any?(document, fn data ->
-        case data do
-          "pid" <> _ -> true
-          _ -> false
-        end
-      end)
-
-    has_byr and has_iyr and has_eyr and has_hgt and has_hcl and has_ecl and has_pid
+    not is_nil(document["byr"]) and
+      not is_nil(document["iyr"]) and
+      not is_nil(document["eyr"]) and
+      not is_nil(document["hgt"]) and
+      not is_nil(document["hcl"]) and
+      not is_nil(document["ecl"]) and
+      not is_nil(document["pid"])
   end
 end

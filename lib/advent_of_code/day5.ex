@@ -13,12 +13,7 @@ defmodule AdventOfCode.Day5 do
 
     0..Enum.max(reserved)
     |> Enum.to_list()
-    |> Enum.filter(fn i ->
-      low = Kernel.-(i, 1)
-      high = Kernel.+(i, 1)
-
-      low in reserved and high in reserved and i not in reserved
-    end)
+    |> Enum.filter(&reserved?(&1, reserved))
     |> List.first()
   end
 
@@ -63,5 +58,9 @@ defmodule AdventOfCode.Day5 do
     (higher - lower)
     |> Kernel./(2)
     |> Kernel.+(lower)
+  end
+
+  defp reserved?(i, reserved) do
+    (i - 1) in reserved and (i + 1) in reserved and i not in reserved
   end
 end

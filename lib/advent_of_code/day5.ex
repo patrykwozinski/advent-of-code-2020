@@ -11,6 +11,10 @@ defmodule AdventOfCode.Day5 do
     |> Enum.max()
   end
 
+  def part2(_file_path) do
+    0
+  end
+
   defp seat_id(["F" | rest], {row_start, row_end}, column) do
     row_end = mid(row_start, row_end) |> floor()
     seat_id(rest, {row_start, row_end}, column)

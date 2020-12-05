@@ -29,22 +29,22 @@ defmodule AdventOfCode.Day5 do
   end
 
   defp seat_id(["F" | rest], {row_start, row_end}, column) do
-    row_end = mid(row_start, row_end) |> floor()
+    row_end = get_between(row_start, row_end) |> floor()
     seat_id(rest, {row_start, row_end}, column)
   end
 
   defp seat_id(["B" | rest], {row_start, row_end}, column) do
-    row_start = mid(row_start, row_end) |> round()
+    row_start = get_between(row_start, row_end) |> round()
     seat_id(rest, {row_start, row_end}, column)
   end
 
   defp seat_id(["L" | rest], row, {column_start, column_end}) do
-    column_end = mid(column_start, column_end) |> floor()
+    column_end = get_between(column_start, column_end) |> floor()
     seat_id(rest, row, {column_start, column_end})
   end
 
   defp seat_id(["R" | rest], row, {column_start, column_end}) do
-    column_start = mid(column_start, column_end) |> round()
+    column_start = get_between(column_start, column_end) |> round()
     seat_id(rest, row, {column_start, column_end})
   end
 
@@ -54,10 +54,8 @@ defmodule AdventOfCode.Day5 do
     row * 8 + column
   end
 
-  defp mid(lower, higher) do
-    (higher - lower)
-    |> Kernel./(2)
-    |> Kernel.+(lower)
+  defp get_between(lower, higher) do
+    (higher - lower) / 2 + lower
   end
 
   defp reserved?(current, reserved) do

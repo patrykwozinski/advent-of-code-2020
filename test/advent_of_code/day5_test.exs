@@ -14,12 +14,12 @@ defmodule AdventOfCodeTest.Day5Test do
   end
 
   describe "Part 2 of the boarding" do
-    test "my seat ID on full list is X" do
-      assert Day5.part2("test/fixtures/day5/short.txt") == 0
+    test "my seat ID on short list was not found" do
+      assert Day5.part2("test/fixtures/day5/short.txt") == nil
     end
 
-    # test "my seat ID on full list is X" do
-    #   assert Day5.part2("test/fixtures/day5/full.txt") == 0
-    # end
+    test "my seat ID on full list is 548" do
+      assert Day5.part2("test/fixtures/day5/full.txt") == 548
+    end
   end
 end

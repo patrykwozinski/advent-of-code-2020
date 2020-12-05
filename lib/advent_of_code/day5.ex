@@ -1,6 +1,29 @@
 defmodule AdventOfCode.Day5 do
   def part1(file_path) do
     file_path
+    |> read_boarding_passes()
+    |> Enum.max()
+  end
+
+  def part2(file_path) do
+    reserved =
+      file_path
+      |> read_boarding_passes()
+      |> Enum.to_list()
+
+    0..Enum.max(reserved)
+    |> Enum.to_list()
+    |> Enum.filter(fn i ->
+      low = Kernel.-(i, 1)
+      high = Kernel.+(i, 1)
+
+      low in reserved and high in reserved and i not in reserved
+    end)
+    |> List.first()
+  end
+
+  defp read_boarding_passes(file_path) do
+    file_path
     |> File.stream!()
     |> Stream.map(&String.replace(&1, "\n", ""))
     |> Stream.map(fn bp ->
@@ -8,11 +31,6 @@ defmodule AdventOfCode.Day5 do
       |> String.graphemes()
       |> seat_id({0, 127}, {0, 7})
     end)
-    |> Enum.max()
-  end
-
-  def part2(_file_path) do
-    0
   end
 
   defp seat_id(["F" | rest], {row_start, row_end}, column) do

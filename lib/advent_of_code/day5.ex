@@ -60,7 +60,7 @@ defmodule AdventOfCode.Day5 do
     |> Kernel.+(lower)
   end
 
-  defp reserved?(i, reserved) do
-    (i - 1) in reserved and (i + 1) in reserved and i not in reserved
+  defp reserved?(current, reserved) do
+    (current - 1) in reserved and (current + 1) in reserved and current not in reserved
   end
 end

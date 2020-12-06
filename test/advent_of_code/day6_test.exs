@@ -18,8 +18,8 @@ defmodule AdventOfCodeTest.Day6Test do
       assert Day6.part2("test/fixtures/day6/short.txt") == 6
     end
 
-    # test "full list contain x same answers in group" do
-    #   assert Day6.part2("test/fixtures/day6/full.txt") == 0
-    # end
+    test "full list contain x same answers in group" do
+      assert Day6.part2("test/fixtures/day6/full.txt") == 3382
+    end
   end
 end

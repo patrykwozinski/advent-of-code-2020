@@ -2,14 +2,14 @@ defmodule AdventOfCode.Day6 do
   def part1(file_path) do
     file_path
     |> read_all_answers()
-    |> Enum.map(&answers(&1, :anyone))
+    |> Enum.map(&answers(&1, :step1))
     |> Enum.sum()
   end
 
   def part2(file_path) do
     file_path
     |> read_all_answers()
-    |> Enum.map(&answers(&1, :everyone))
+    |> Enum.map(&answers(&1, :step2))
     |> Enum.sum()
   end
 
@@ -19,8 +19,8 @@ defmodule AdventOfCode.Day6 do
     |> Enum.map(&String.split/1)
   end
 
-  defp answers(list, :anyone), do: answers(list, &MapSet.union/2)
-  defp answers(list, :everyone), do: answers(list, &MapSet.intersection/2)
+  defp answers(list, :step1), do: answers(list, &MapSet.union/2)
+  defp answers(list, :step2), do: answers(list, &MapSet.intersection/2)
 
   defp answers(list, f) do
     list

@@ -6,7 +6,9 @@ defmodule AdventOfCode.Day6 do
       group
       |> Enum.flat_map(& &1)
       |> Enum.uniq()
+      |> Enum.count()
     end)
+    |> Enum.sum()
   end
 
   def part2(file_path) do

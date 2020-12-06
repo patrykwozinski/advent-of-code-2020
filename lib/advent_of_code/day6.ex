@@ -2,12 +2,7 @@ defmodule AdventOfCode.Day6 do
   def part1(file_path) do
     file_path
     |> read_groups()
-    |> Enum.map(fn group ->
-      group
-      |> Enum.flat_map(& &1)
-      |> Enum.uniq()
-      |> Enum.count()
-    end)
+    |> Enum.map(&count_number_of_yes(&1))
     |> Enum.sum()
   end
 
@@ -23,5 +18,12 @@ defmodule AdventOfCode.Day6 do
       Enum.map(group, &(String.replace(&1, "\n", "") |> String.graphemes()))
     end)
     |> Enum.to_list()
+  end
+
+  defp count_number_of_yes(group) do
+    group
+    |> Enum.flat_map(& &1)
+    |> Enum.uniq()
+    |> Enum.count()
   end
 end

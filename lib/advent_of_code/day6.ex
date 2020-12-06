@@ -1,37 +1,32 @@
 defmodule AdventOfCode.Day6 do
   def part1(file_path) do
     file_path
-    |> read_groups()
-    |> Enum.map(&count_unique_yes(&1))
+    |> read_all_answers()
+    |> Enum.map(&answers(&1, :anyone))
     |> Enum.sum()
   end
 
   def part2(file_path) do
     file_path
-    |> read_groups()
-    |> Enum.map(&count_all_yes(&1))
+    |> read_all_answers()
+    |> Enum.map(&answers(&1, :everyone))
+    |> Enum.sum()
   end
 
-  defp read_groups(file_path) do
-    file_path
-    |> File.stream!()
-    |> Stream.chunk_by(&(&1 == "\n"))
-    |> Stream.filter(&(&1 != ["\n"]))
-    |> Stream.map(fn group ->
-      Enum.map(group, &(String.replace(&1, "\n", "") |> String.graphemes()))
-    end)
-    |> Enum.to_list()
+  defp read_all_answers(file_path) do
+    File.read!(file_path)
+    |> String.split("\n\n", trim: true)
+    |> Enum.map(&String.split/1)
   end
 
-  defp count_unique_yes(group) do
-    group
-    |> Enum.flat_map(& &1)
-    |> Enum.uniq()
+  defp answers(list, :anyone), do: answers(list, &MapSet.union/2)
+  defp answers(list, :everyone), do: answers(list, &MapSet.intersection/2)
+
+  defp answers(list, f) do
+    list
+    |> Enum.map(&String.to_charlist/1)
+    |> Enum.map(&MapSet.new/1)
+    |> Enum.reduce(f)
     |> Enum.count()
-  end
-
-  defp count_all_yes(group) do
-    group
-    |> IO.inspect()
   end
 end

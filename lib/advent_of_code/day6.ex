@@ -14,7 +14,8 @@ defmodule AdventOfCode.Day6 do
   end
 
   defp read_all_answers(file_path) do
-    File.read!(file_path)
+    file_path
+    |> File.read!()
     |> String.split("\n\n", trim: true)
     |> Enum.map(&String.split/1)
   end

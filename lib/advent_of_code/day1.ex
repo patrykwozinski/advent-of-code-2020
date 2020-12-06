@@ -202,7 +202,7 @@ defmodule AdventOfCode.Day1 do
   )
 
   def part1() do
-    numbers = Enum.map(@numbers, &String.to_integer(&1))
+    numbers = Enum.map(@numbers, &String.to_integer/1)
 
     [res | _] = for x <- numbers,
       y <- numbers,
@@ -213,7 +213,7 @@ defmodule AdventOfCode.Day1 do
   end
 
   def part2() do
-    numbers = Enum.map(@numbers, &String.to_integer(&1))
+    numbers = Enum.map(@numbers, &String.to_integer/1)
 
     [res | _] = for x <- numbers,
       y <- numbers,

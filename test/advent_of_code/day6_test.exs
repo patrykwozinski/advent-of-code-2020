@@ -8,8 +8,8 @@ defmodule AdventOfCodeTest.Day6Test do
       assert Day6.part1("test/fixtures/day6/short.txt") == 11
     end
 
-    test "full list contain different x answers" do
-      assert Day6.part1("test/fixtures/day6/full.txt") == 0
-    end
+    # test "full list contain different x answers" do
+    #   assert Day6.part1("test/fixtures/day6/full.txt") == 0
+    # end
   end
 end

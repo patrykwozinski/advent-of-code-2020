@@ -3,14 +3,14 @@ defmodule AdventOfCode.Day7 do
 
   def part1(file_path) do
     file_path
-    |> read_lines()
+    |> read_bag_list()
     |> invert_list()
   end
 
   def part2(_file_path) do
   end
 
-  defp read_lines(file_path) do
+  defp read_bag_list(file_path) do
     file_path
     |> File.read!()
     |> String.split("\n")

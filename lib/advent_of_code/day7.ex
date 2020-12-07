@@ -15,7 +15,7 @@ defmodule AdventOfCode.Day7 do
     |> File.stream!()
     |> Stream.map(fn line ->
       line
-      |> String.replace("\n", "")
+      |> String.replace(["\n", "."], "")
       |> String.split(" bags contain ")
     end)
     |> Enum.to_list()

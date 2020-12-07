@@ -4,6 +4,7 @@ defmodule AdventOfCode.Day7 do
       file_path
       |> read_lines()
       |> Enum.filter(&no_empty/1)
+      |> Enum.map(&prepare_contained/1)
       |> IO.inspect()
   end
 
@@ -21,6 +22,8 @@ defmodule AdventOfCode.Day7 do
     |> Enum.to_list()
   end
 
-  defp no_empty([_, "no other bags."]), do: false
+  defp no_empty([_, "no other bags"]), do: false
   defp no_empty(_), do: true
+
+  defp prepare_contained([bag, contained]), do: [bag, String.split(contained, ", ")]
 end

@@ -42,9 +42,9 @@ defmodule AdventOfCode.Day7 do
   end
 
   defp invert_list(list) do
-    Enum.reduce(list, %{}, fn {parent, children}, inverted_tree ->
-      Enum.reduce(children, inverted_tree, fn {_n, child}, inverted_tree ->
-        Map.update(inverted_tree, child, [parent], &[parent | &1])
+    Enum.reduce(list, %{}, fn {parent, children}, bags ->
+      Enum.reduce(children, bags, fn {_n, child}, bags ->
+        Map.update(bags, child, [parent], &[parent | &1])
       end)
     end)
   end

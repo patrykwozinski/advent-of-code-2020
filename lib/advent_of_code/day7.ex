@@ -1,10 +1,13 @@
 defmodule AdventOfCode.Day7 do
   @bags ~r/\A(\d) (\w+ \w+).*\z/
+  @search_for "shiny gold"
 
   def part1(file_path) do
     file_path
     |> read_bag_list()
     |> invert_list()
+    |> only_type(@search_for)
+    |> Enum.count()
   end
 
   def part2(_file_path) do
@@ -47,5 +50,16 @@ defmodule AdventOfCode.Day7 do
         Map.update(bags, child, [parent], &[parent | &1])
       end)
     end)
+  end
+
+  defp only_type(bags, name), do: only_type([name], MapSet.new(), bags)
+
+  defp only_type([], found, _all_bags), do: found
+
+  defp only_type([first, rest], found, all_bags) do
+    case Map.fetch(all_bags, first) do
+      :error -> only_type(rest, found, all_bags)
+      {:ok, names} -> only_type(names ++ rest, MapSet.union(found, MapSet.new(names)), all_bags)
+    end
   end
 end

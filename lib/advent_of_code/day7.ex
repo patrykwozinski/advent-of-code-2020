@@ -23,8 +23,6 @@ defmodule AdventOfCode.Day7 do
     |> Map.new(fn [bag, contained] ->
       {bag, prepare_contained(contained)}
     end)
-
-    # |> IO.inspect()
   end
 
   defp prepare_contained(contained) when is_binary(contained),
@@ -34,8 +32,9 @@ defmodule AdventOfCode.Day7 do
 
   defp prepare_contained(contained) when is_list(contained) do
     contained
-    |> Enum.map(fn bag ->
-      Regex.run(@bags, bag, capture: :all_but_first)
+    |> Enum.map(fn bags ->
+      Regex.run(@bags, bags, capture: :all_but_first)
+      |> Enum.map(fn [no_bags, bag] -> {no_bags, bag} end)
     end)
     |> IO.inspect()
   end

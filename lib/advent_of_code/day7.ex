@@ -34,7 +34,7 @@ defmodule AdventOfCode.Day7 do
     contained
     |> Enum.map(fn bags ->
       Regex.run(@bags, bags, capture: :all_but_first)
-      |> Enum.map(fn [no_bags, bag] -> {no_bags, bag} end)
+      |> Enum.map(fn [no_bags, bag] -> {String.to_integer(no_bags), bag} end)
     end)
     |> IO.inspect()
   end

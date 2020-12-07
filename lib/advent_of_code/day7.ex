@@ -1,7 +1,10 @@
 defmodule AdventOfCode.Day7 do
   def part1(file_path) do
-    lines = read_lines(file_path)
-    |> IO.inspect()
+    lines =
+      file_path
+      |> read_lines()
+      |> Enum.filter(&no_empty/1)
+      |> IO.inspect()
   end
 
   def part2(_file_path) do
@@ -17,4 +20,7 @@ defmodule AdventOfCode.Day7 do
     end)
     |> Enum.to_list()
   end
+
+  defp no_empty([_, "no other bags."]), do: false
+  defp no_empty(_), do: true
 end

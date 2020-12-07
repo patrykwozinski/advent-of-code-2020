@@ -8,8 +8,8 @@ defmodule AdventOfCodeTest.Day7Test do
       assert Day7.part1("test/fixtures/day7/short.txt") == 4
     end
 
-    # test "shiny gold bag could might be in X bags in full list" do
-    #   assert Day6.part1("test/fixtures/day7/full.txt") == 0
-    # end
+    test "shiny gold bag could might be in 128 bags in full list" do
+      assert Day7.part1("test/fixtures/day7/full.txt") == 128
+    end
   end
 end

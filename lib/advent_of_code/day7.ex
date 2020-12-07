@@ -2,10 +2,8 @@ defmodule AdventOfCode.Day7 do
   @bags ~r/\A(\d) (\w+ \w+).*\z/
 
   def part1(file_path) do
-    lines =
-      file_path
-      |> read_lines()
-      |> Enum.map(&prepare_contained/1)
+    file_path
+    |> read_lines()
   end
 
   def part2(_file_path) do
@@ -23,19 +21,23 @@ defmodule AdventOfCode.Day7 do
     |> Map.new(fn [bag, contained] ->
       {bag, prepare_contained(contained)}
     end)
+    |> IO.inspect()
   end
 
-  defp prepare_contained(contained) when is_binary(contained),
-    do: String.split(contained, ", ") |> prepare_contained()
+  defp prepare_contained(contained) when is_binary(contained) do
+    contained
+    |> String.split(", ")
+    |> prepare_contained()
+  end
 
   defp prepare_contained(["no other bags"]), do: []
 
-  defp prepare_contained(contained) when is_list(contained) do
+  defp prepare_contained(contained) do
     contained
     |> Enum.map(fn bags ->
-      Regex.run(@bags, bags, capture: :all_but_first)
-      |> Enum.map(fn [no_bags, bag] -> {String.to_integer(no_bags), bag} end)
+      [no_bags, bag] = Regex.run(@bags, bags, capture: :all_but_first)
+
+      {String.to_integer(no_bags), bag}
     end)
-    |> IO.inspect()
   end
 end
